@@ -1,0 +1,43 @@
+# nginx site config. Rendered from this template at container start:
+# the official nginx image runs envsubst, substituting ${LLM_*} from the
+# environment (see NGINX_ENVSUBST_FILTER=LLM_ in the Dockerfile).
+# nginx's own runtime $variables are left untouched.
+
+server {
+    listen       80;
+    server_name  _;
+
+    root   /usr/share/nginx/html;
+    index  forestchat.html index.html;
+
+    # gzip for the static bundle
+    gzip            on;
+    gzip_types      text/css application/javascript application/json;
+    gzip_min_length 1024;
+
+    # Static site
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # ── LLM reverse proxy ────────────────────────────────────────
+    # The browser calls same-origin /api/llm/*; nginx forwards to the
+    # upstream and adds the Authorization header here. The API key comes
+    # from the environment (.env -> LLM_API_KEY) and NEVER reaches the
+    # browser. No CORS, no key in client code.
+    location /api/llm/ {
+        proxy_pass            ${LLM_UPSTREAM}/;
+        proxy_http_version    1.1;
+        proxy_set_header      Host $proxy_host;
+        proxy_set_header      Authorization "Bearer ${LLM_API_KEY}";
+        proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_ssl_server_name on;
+
+        proxy_connect_timeout 10s;
+        proxy_send_timeout    120s;
+        proxy_read_timeout    120s;
+
+        # Strip any Authorization the client tried to send (defense in depth)
+        proxy_set_header      Cookie "";
+    }
+}

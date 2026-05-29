@@ -1,0 +1,11 @@
+# Never bake secrets or local config into the image
+config.js
+.env
+.env.*
+*.local
+
+# Junk
+.DS_Store
+Thumbs.db
+*.log
+node_modules

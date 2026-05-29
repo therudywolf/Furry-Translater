@@ -1,0 +1,18 @@
+# UWU Translator — Web app + LLM reverse proxy.
+#
+#   1. cp .env.example .env   and fill in LLM_UPSTREAM / LLM_API_KEY / LLM_MODEL
+#   2. docker compose up --build
+#   3. open http://localhost:8080
+#
+# The API key lives only in .env and is injected into upstream requests by
+# nginx. It is never written into the image or sent to the browser.
+
+services:
+  web:
+    build: ./Web
+    image: furry-translater-web
+    container_name: furry-translater-web
+    env_file: .env
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    restart: unless-stopped

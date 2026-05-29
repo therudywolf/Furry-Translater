@@ -1,0 +1,10 @@
+{
+  "name": "furry-translater-web",
+  "version": "0.9.0",
+  "private": true,
+  "description": "UWU Furry Translator — web app (translator + AI chat)",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "test": "node --test js/*.test.js"
+  }
+}

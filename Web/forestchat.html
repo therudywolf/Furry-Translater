@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="RudyWolf Ultimate - UWU Translator + AI Chat PREMIUM">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>🐺 RudyWolf Ultimate Premium</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nocturne">
+    <!-- ENTRY PORTAL -->
+    <div class="entry-portal" id="entryPortal">
+        <div class="portal-bg" id="portalBg"></div>
+        <div class="portal-content">
+            <div class="portal-logo">RUDYWOLF<br><span style="font-size: 0.4em; opacity: 0.9;">ULTIMATE</span></div>
+            <div class="portal-subtitle">🐺 Wolf Pack Protocol v2.0</div>
+            <div class="portal-description">
+                Добро пожаловать в мир пяти волков<br>
+                Переводчик UWU + AI Чат в одном месте
+            </div>
+            <button class="enter-btn" id="enterBtn">╔════ ВОЙТИ ════╗</button>
+        </div>
+    </div>
+
+    <!-- ANIMATED BACKGROUND -->
+    <div class="animated-bg" id="animatedBg"></div>
+
+    <!-- PERSONALITY BAR -->
+    <div class="personality-bar">
+        <div style="font-weight: bold; margin-right: 10px;">🐺 ВЫБЕРИ ВОЛКА:</div>
+        <button class="personality-btn btn-nocturne active" data-wolf="nocturne">🐺 Ноктюрн</button>
+        <button class="personality-btn btn-rudy" data-wolf="rudy">🚗 Руди</button>
+        <button class="personality-btn btn-nick" data-wolf="nick">🎸 Ник</button>
+        <button class="personality-btn btn-death" data-wolf="death">☠️ Смерть</button>
+        <button class="personality-btn btn-felix" data-wolf="felix">💕 Феликс</button>
+    </div>
+
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header">
+            <h1 id="wolfTitle">🐺 NOCTURNE PROTOCOL</h1>
+            <p class="subtitle" id="wolfSubtitle">*материализуется из цифрового тумана* Ultimate Edition</p>
+        </header>
+
+        <!-- MODE TOGGLE -->
+        <div class="mode-toggle">
+            <button class="mode-btn active" data-mode="translator">📝 ПЕРЕВОДЧИК</button>
+            <button class="mode-btn" data-mode="chat">💬 ЧАТ</button>
+        </div>
+
+        <!-- TRANSLATOR MODE -->
+        <div class="translator-mode active" id="translatorMode">
+            <div class="text-section">
+                <label for="input" id="inputLabel">▼ INPUT *уши настороже*</label>
+                <textarea id="input" placeholder="Введи текст..." spellcheck="false"></textarea>
+            </div>
+
+            <div class="button-group">
+                <button class="btn" id="transformBtn">⚡ TRANSFORM</button>
+                <button class="btn" id="copyBtn">📋 COPY</button>
+                <button class="btn" id="clearTranslatorBtn">🗑 CLEAR</button>
+            </div>
+
+            <div class="text-section">
+                <label for="output" id="outputLabel">▼ OUTPUT *зарычал одобрительно*</label>
+                <textarea id="output" placeholder="Результат..." readonly spellcheck="false"></textarea>
+            </div>
+        </div>
+
+        <!-- CHAT MODE -->
+        <div class="chat-mode" id="chatMode">
+            <div class="ai-mode-toggle">
+                <span class="ai-mode-label">Заготовленные ответы</span>
+                <div class="toggle-switch" id="aiToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="ai-mode-label">AI (нейрогенерация)</span>
+                <div class="ai-status" id="aiStatus">
+                    <div class="status-indicator offline"></div>
+                    <span>Проверка...</span>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages"></div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <span>*печатает*</span>
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <textarea class="chat-input" id="chatInput" placeholder="Напиши сообщение..." rows="1"></textarea>
+                    <button class="send-btn btn" id="sendBtn">ОТПРАВИТЬ</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p id="footerText">*клацает когтями* | RudyWolf Ultimate v2.0 | Premium Edition</p>
+        </footer>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- СКРИПТЫ -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--
+        config.js (в .gitignore) задаёт API_BASE_URL, модель и т.п.
+        В прокси-режиме ключ остаётся на сервере (nginx + .env) и в браузер
+        не попадает. Если config.js нет — используются значения по умолчанию.
+        Модули грузятся по порядку зависимостей: wolves → translator → api → app.
+    -->
+    <script src="config.js" onerror="console.warn('config.js not found — using defaults')"></script>
+    <script src="js/wolves.js"></script>
+    <script src="js/translator.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

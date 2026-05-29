@@ -1,0 +1,60 @@
+/**
+ * API configuration for the UWU Translator Web app.
+ *
+ * HOW TO USE
+ *   1. Copy this file to config.js:  cp config.js.example config.js
+ *   2. Pick a mode below and edit the values.
+ *   3. config.js is gitignored and is never committed.
+ *
+ * ─────────────────────────────────────────────────────────────────
+ * MODE A — Reverse proxy (recommended, secure, default for Docker)
+ * ─────────────────────────────────────────────────────────────────
+ * The nginx container proxies /api/llm/* to your LLM and injects the
+ * Authorization header server-side from .env. The API key NEVER reaches
+ * the browser, and there are no CORS problems (same origin).
+ *
+ *   window.API_BASE_URL = '/api/llm';
+ *   window.MODEL_NAME    = 'google/gemma-4-e2b';
+ *   // No API key here — it lives in .env (LLM_API_KEY).
+ *
+ * Run it with:  docker compose up --build   (see .env.example)
+ *
+ * ─────────────────────────────────────────────────────────────────
+ * MODE B — Direct connection (local dev only, exposes the key)
+ * ─────────────────────────────────────────────────────────────────
+ * The browser talks to the LLM directly. Use ONLY for a local LM Studio
+ * without auth, or throwaway testing. If you set API_KEY here it is
+ * visible to anyone who opens the page (DevTools) — do not deploy this.
+ *
+ *   window.API_BASE_URL = 'http://127.0.0.1:1234'; // local LM Studio
+ *   window.MODEL_NAME    = 'google/gemma-4-e2b';
+ *   window.API_KEY       = '';   // Bearer token, if your server needs one
+ *
+ * ─────────────────────────────────────────────────────────────────
+ * Active configuration (edit me)
+ * ─────────────────────────────────────────────────────────────────
+ */
+
+// Base URL of the LLM API (without /v1). Use '/api/llm' for the proxy.
+window.API_BASE_URL = '/api/llm';
+
+// Model id to request (must exist on the server; GET /v1/models to list).
+window.MODEL_NAME = 'google/gemma-4-e2b';
+
+// Bearer token for direct mode (MODE B). Leave '' when using the proxy.
+window.API_KEY = '';
+
+// Chain-of-thought control:
+//   ''     -> omit the param. gemma keeps reasoning separate, content is clean.
+//   'none' -> disable reasoning; REQUIRED for forced-reasoning Qwen3 builds
+//             (otherwise the reply comes back empty).
+window.REASONING_EFFORT = '';
+
+// Max tokens per reply.
+window.MAX_TOKENS = 600;
+
+// Messages kept in chat history (excluding the system prompt).
+window.CHAT_HISTORY_LIMIT = 20;
+
+// Request timeout in milliseconds.
+window.REQUEST_TIMEOUT_MS = 60000;
