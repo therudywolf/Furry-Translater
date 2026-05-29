@@ -1,0 +1,49 @@
+# ─── Secrets & local config (NEVER commit) ───────────────────────
+.env
+.env.*
+!.env.example
+Web/config.js
+Script/config.local.ini
+*.local
+*.secret
+*.pem
+*.key
+!*public*.pem
+
+# ─── Runtime data (Python GUI) ───────────────────────────────────
+Python/settings.json
+Python/history.json
+
+# ─── Python ──────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+.venv/
+ENV/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ─── Node (JS tests) ─────────────────────────────────────────────
+node_modules/
+
+# ─── IDE / editors ───────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ─── OS ──────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs & temp ─────────────────────────────────────────────────
+*.log
+*.tmp
+*.bak

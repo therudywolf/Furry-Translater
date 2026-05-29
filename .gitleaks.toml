@@ -1,0 +1,19 @@
+title = "Furry-Translater gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Examples, docs, and known-safe placeholders"
+paths = [
+  '''\.env\.example$''',
+  '''Web/config\.js\.example$''',
+  '''\.gitleaks\.toml$''',
+  '''README\.md$''',
+]
+regexes = [
+  # Obvious non-secrets used in docs/examples
+  '''(?i)(example|changeme|placeholder|your[_-]|redacted|dummy|sample)''',
+  '''sk-x{6,}''',
+  '''sk-[A-Za-z0-9]{0,4}xxxx''',
+]

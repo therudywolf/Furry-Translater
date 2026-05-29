@@ -1,0 +1,15 @@
+# Keep LF on these regardless of platform — they run inside Linux containers.
+*.sh            text eol=lf
+*.template      text eol=lf
+*.conf          text eol=lf
+Dockerfile      text eol=lf
+.env.example    text eol=lf
+
+# Treat AHK as text
+*.ahk           text
+
+# Binary
+*.exe           binary
+*.png           binary
+*.jpg           binary
+*.ico           binary
